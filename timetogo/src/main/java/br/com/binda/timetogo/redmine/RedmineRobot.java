@@ -18,11 +18,13 @@ import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import br.com.binda.timetogo.properties.TimeToGoProperties;
 
 public class RedmineRobot {
 	private static String START_LOGIN_PAGE_URL = TimeToGoProperties.redmineUrl + "/login";
+	private static String ISSUES_PAGE_URL = TimeToGoProperties.redmineUrl + "/issues";
 
 	private static CookieStore COOKIE_STORE = new BasicCookieStore();
 	private static CloseableHttpResponse httpResponse;
@@ -83,6 +85,39 @@ public class RedmineRobot {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			throw e;
+		}
+
+	}
+
+	public static RedmineIssue getIssueById(String issueId) throws Exception {
+		HttpGet httpGet = new HttpGet(ISSUES_PAGE_URL + "/" + issueId);
+
+		httpGet.addHeader("user-agent",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36");
+
+		try (CloseableHttpClient httpClient = getHttpClient(COOKIE_STORE)) {
+
+			httpResponse = httpClient.execute(httpGet);
+
+			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_FOUND)
+				throw new Exception("Issue not found." + issueId);
+			else if (httpResponse.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
+				throw new Exception("Unable to acces site. Status: " + httpResponse.getStatusLine().getStatusCode());
+
+			String page = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+			Document document = Jsoup.parse(page);
+			RedmineIssue redmineIssue = new RedmineIssue();
+			redmineIssue.setId(issueId);
+			redmineIssue.setSubject(document.getElementById("content").getElementsByClass("Subject").first()
+					.getElementsByTag("h3").first().text());
+			redmineIssue.setSpentTime(
+					document.getElementsByClass("spent-time attribute").first().getElementsByClass("value").text());
+			redmineIssue.setEstimatedHours(document.getElementsByClass("estimated-hours attribute").first()
+					.getElementsByClass("value").text());
+			return redmineIssue;
+
+		} catch (Exception e) {
 			throw e;
 		}
 
