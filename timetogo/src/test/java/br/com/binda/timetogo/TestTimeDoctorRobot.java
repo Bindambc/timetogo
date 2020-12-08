@@ -32,7 +32,7 @@ public class TestTimeDoctorRobot {
 	@Test
 	public void TestGetStartPageTest() {
 
-		String startPage = TimeDoctorRobot.getStartPage();
+		String startPage = TimeDoctorRobot.getCsrfToken();
 
 		Document html = Jsoup.parse(startPage);
 
@@ -43,7 +43,7 @@ public class TestTimeDoctorRobot {
 	@Test
 	public void doLoginTest() {
 
-		String startPage = TimeDoctorRobot.getStartPage();
+		String startPage = TimeDoctorRobot.getCsrfToken();
 
 		Document html = Jsoup.parse(startPage);
 
@@ -61,7 +61,7 @@ public class TestTimeDoctorRobot {
 	@Test
 	public void getCSVTimeUseReportDataTest() {
 
-		String startPage = TimeDoctorRobot.getStartPage();
+		String startPage = TimeDoctorRobot.getCsrfToken();
 
 		Document html = Jsoup.parse(startPage);
 		String userId = null;

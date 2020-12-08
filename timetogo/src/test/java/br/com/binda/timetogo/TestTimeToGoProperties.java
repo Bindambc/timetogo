@@ -12,7 +12,7 @@ public class TestTimeToGoProperties {
 		try {
 			TimeToGoProperties.loadConfig();
 
-			Assert.assertNotNull(TimeToGoProperties.redmineApiKey);
+			Assert.assertNotNull(TimeToGoProperties.redmineUser);
 			Assert.assertNotNull(TimeToGoProperties.redmineUrl);
 			Assert.assertNotNull(TimeToGoProperties.timeDoctorPassword);
 			Assert.assertNotNull(TimeToGoProperties.timeDoctorUser);

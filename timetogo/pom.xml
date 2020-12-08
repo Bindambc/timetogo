@@ -83,11 +83,6 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.13.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.taskadapter</groupId>
-			<artifactId>redmine-java-api</artifactId>
-			<version>3.1.2</version>
-		</dependency>
 	</dependencies>
 </project>
 

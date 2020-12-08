@@ -1,34 +1,47 @@
 package br.com.binda.timetogo;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import com.taskadapter.redmineapi.RedmineException;
-import com.taskadapter.redmineapi.RedmineManager;
-import com.taskadapter.redmineapi.RedmineManagerFactory;
-import com.taskadapter.redmineapi.TimeEntryManager;
-import com.taskadapter.redmineapi.bean.TimeEntry;
-import com.taskadapter.redmineapi.bean.TimeEntryFactory;
-import com.taskadapter.redmineapi.internal.Transport;
+import br.com.binda.timetogo.properties.TimeToGoProperties;
+import br.com.binda.timetogo.redmine.RedmineRobot;
 
 public class TestRedmineRobot {
 
-	@Test
-	public void redmineTest() {
-		String API_KEY = "";
-		String REDMINE_URL = "";
-		RedmineManager redmineManager = RedmineManagerFactory.createWithApiKey(REDMINE_URL, API_KEY);
-		TimeEntryManager timeEntryManager = redmineManager.getTimeEntryManager();
-		Transport transport = redmineManager.getTransport();
-		TimeEntry timeEntry = TimeEntryFactory.create();
-
-		timeEntry.setComment("test");
-		timeEntry.setHours(1f);
+	@Before
+	public void init() {
 
 		try {
-			System.err.println(redmineManager.getIssueManager().getIssueById(47495).getSubject());
-			System.err.println(redmineManager.getIssueManager().getIssueById(47495).getSpentHours());
+			TimeToGoProperties.loadConfig();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		} catch (RedmineException e) {
+	}
+
+	@Test
+	public void getCsrfTokenTest() {
+
+		String csrfToken;
+		try {
+			csrfToken = RedmineRobot.getCsrfToken();
+			System.out.print(csrfToken);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
+	public void doLoginTest() {
+		String csrfToken;
+		try {
+			csrfToken = RedmineRobot.getCsrfToken();
+			RedmineRobot.doLogin(csrfToken);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

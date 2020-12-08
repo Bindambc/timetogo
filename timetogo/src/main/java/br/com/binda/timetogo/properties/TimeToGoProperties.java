@@ -17,7 +17,8 @@ public class TimeToGoProperties {
 
 	// vars redmine
 	public static String redmineUrl;
-	public static String redmineApiKey;
+	public static String redmineUser;
+	public static String redminePassword;
 
 	public static void loadConfig() throws Exception {
 		Properties properties = new Properties();
@@ -28,11 +29,14 @@ public class TimeToGoProperties {
 			timeDoctorUrl = properties.getProperty("timeDoctorUrl");
 			timeDoctorUser = properties.getProperty("timeDoctorUser");
 			timeDoctorPassword = properties.getProperty("timeDoctorPassword");
-
-			redmineUrl = properties.getProperty("redmineUrl");
-			redmineApiKey = properties.getProperty("redmineApiKey");
 			timeDoctorUserLocale = properties.getProperty("timeDoctorUserLocale");
 
+			redmineUrl = properties.getProperty("redmineUrl");
+			redmineUser = properties.getProperty("redmineUser");
+			redminePassword = properties.getProperty("redminePassword");
+
+		} catch (Exception e) {
+			throw new Exception("Unable to load \"timetogo.properties\" file.\n", e);
 		}
 	}
 

@@ -32,7 +32,7 @@ public class TimeDoctorRobot {
 
 	private static CloseableHttpResponse httpResponse;
 
-	public static String getStartPage() {
+	public static String getCsrfToken() {
 
 		HttpGet httpGet = new HttpGet(START_PAGE_URL);
 
