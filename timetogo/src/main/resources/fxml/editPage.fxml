@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="470.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.binda.timetogo.controller.DetalheApontamentoController">
+	<children>
+		<MenuBar prefWidth="640.0" VBox.vgrow="NEVER" />
+		<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField fx:id="txtTarefa" layoutX="34.0" layoutY="60.0" prefHeight="25.0" prefWidth="148.0" />
+            <TextField fx:id="txtTempo" layoutX="509.0" layoutY="60.0" prefHeight="25.0" prefWidth="148.0" />
+            <TextArea fx:id="txtDescricao" layoutX="34.0" layoutY="150.0" prefHeight="235.0" prefWidth="623.0" />
+            <Label layoutX="34.0" layoutY="34.0" text="Tarefa" />
+            <Label layoutX="271.0" layoutY="34.0" text="Tipo" />
+            <Label layoutX="34.0" layoutY="118.0" text="Descrição" />
+            <Label layoutX="509.0" layoutY="34.0" text="Tempo" />
+            <ComboBox fx:id="txtTipo" layoutX="270.0" layoutY="60.0" prefWidth="150.0" />
+            <Button fx:id="btnSalvar" layoutX="465.0" layoutY="413.0" mnemonicParsing="false" onAction="#acSalvar" prefHeight="25.0" prefWidth="89.0" text="Salvar" />
+            <Button fx:id="btnCancelar" layoutX="568.0" layoutY="413.0" mnemonicParsing="false" onAction="#acCancelar" prefHeight="25.0" prefWidth="89.0" text="Cancelar" />
+         </children>
+		</AnchorPane>
+	</children>
+</VBox>
