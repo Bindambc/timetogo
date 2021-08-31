@@ -24,5 +24,3 @@ hs_err_pid*
 /timetogo/timetogo.properties
 *.properties
 
-*.idea
-*.classpath
